@@ -1,0 +1,55 @@
+.buttons{
+    width: 100%;
+    height: 79.366%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.button {
+    width: 90%;
+    height: 90%;
+    margin: 5px;
+    font-size: 25px;
+    font-weight: 600;
+    background-color: rgb(233, 233, 233);
+}
+@media (min-width:768px){
+    .button:hover {
+        transform: translateY(-2px);
+    }
+}
+.button:active {
+    transform: translateY(2px);
+}
+
+.number {
+    border: none;
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.add-button, .subtraction-button,
+.multiply-button, .divsion-button,
+.mod-button, .pranthises-button {
+    background-color: rgb(231, 206, 64);
+    border: none;
+    border-radius: 12px;
+}
+
+.c-button, .back-button {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 12px;
+}
+
+.back-button {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.equales-button, .dot-button{
+    background-color: rgb(184, 125, 0);
+    border: none;
+    border-radius: 12px;
+}
