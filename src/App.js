@@ -21,17 +21,31 @@ function App() {
       return false;
     }
   } */
-  function isValid(expr) {
-    const nums = [1, 2, 3, 4, 5];
-    /* const expression = display.split(""); */
-    /* console.log(expression); */
-    return true;
+  function isValid() {
+    const oper = ["+", "*", "-", "/", "%", "(", ")"];
+    const expr = String(display).split("");
+    let index = 0;
+    if( (/\d|\.|\-/.test(expr[0])) &&
+  (/\d|\./.test(expr[expr.length - 1])) ){
+      for(let c of expr) {
+        if (oper.includes(c)) {
+          if(oper.includes(expr[index + 1])) {
+            return false;
+          }
+        }
+        index++;
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  console.log([1,5,7]);
   function getResult() {
-    if(isValid(display)) {
-      setDisplay(eval(display))
+    if(isValid()) {
+      const result = eval(display); 
+      setDisplay(String(result));
+      setInvaild("");
     } else {
       setInvaild("Invalid Expression!");
       setDisplay("");
@@ -47,6 +61,43 @@ function App() {
     let input = display.slice(0, -1);
     setDisplay(input)
   }
+
+
+const validInput =
+["0" , "1", "2", "3", "4", "5", "6", "7", "8", "9", "+",
+  "-", "*", "/", "%", "(", ")", "Backspace", "Enter", "Escape", "."];
+
+const inputs = ["0" , "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "(", ")", "+", "-", "*", "/", "%"];
+React.useEffect(() => {
+  const handleKeyDown = (e) => {
+    if (validInput.includes(e.key)) {
+      const btnEffect = document.querySelector(`button[value="${e.key}"]`);
+      if(btnEffect) {
+        btnEffect.style.transform = "translateY(2px)";
+        setTimeout(() => {
+          btnEffect.style.transform = "";
+        }, 100);
+      }
+      if (inputs.includes(e.key)) {
+        displayHandle(e.key);
+      } else if (e.key === "Enter") {
+        getResult();
+      } else if (e.key === "Backspace") {
+        backSpace();
+      } else if(e.key === "Escape") {
+        clearDisplay();
+      }
+    }
+  };
+
+  document.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    document.removeEventListener("keydown", handleKeyDown);
+  };
+}, [display, invaild]);
+
+
   return (
     <div className='container'>
       <div className='app'>

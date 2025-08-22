@@ -12,19 +12,19 @@ function Buttons(props) {
     }
 
     function buttonHandle(e) {
-        if(props.isValid === "Invalid Expression!" && e.target.value !== "C") {
+        if(props.isValid === "Invalid Expression!" && e.target.value !== "Escape") {
             e.preventDefault();
             return;
         }
-        if(e.target.value !== "C" && e.target.value !== "back space"
-            && e.target.value !== "=" && e.target.value !== "()")
+        if(e.target.value !== "C" && e.target.value !== "Backspace"
+            && e.target.value !== "Enter" && e.target.value !== "()")
         {
             props.display(e.target.value);
-        } else if (e.target.value === "=") {
+        } else if (e.target.value === "Enter") {
             props.equal();
-        } else if (e.target.value === "C") {
+        } else if (e.target.value === "Escape") {
             props.clearDisplay();
-        } else if (e.target.value === "back space") {
+        } else if (e.target.value === "Backspace") {
             props.backSpace();
         } else if (e.target.value === "()") {
             if (countOccurrences(props.currentValue, "(") > 
@@ -40,7 +40,7 @@ function Buttons(props) {
 
     return (
         <div className="buttons">
-            <button className="c-button button" value={"C"} onClick={buttonHandle}>C</button>
+            <button className="c-button button" value={"Escape"} onClick={buttonHandle}>C</button>
             <button className="pranthises-button button" value={"()"} onClick={buttonHandle}>()</button>
             <button className="mod-button button" value={"%"} onClick={buttonHandle}>%</button>
             <button className="divsion-button button" value={"/"} onClick={buttonHandle}>/</button>
@@ -58,8 +58,8 @@ function Buttons(props) {
             <button className="add-button button" value={"+"} onClick={buttonHandle}>+</button>
             <button className="dot-button button" value={"."} onClick={buttonHandle}>.</button>
             <button className="number button" value={0} onClick={buttonHandle}>0</button>
-            <button className="back-button button" value={"back space"} onClick={buttonHandle}>back</button>
-            <button className="equales-button button" value={"="} onClick={buttonHandle}>=</button>
+            <button className="back-button button" value={"Backspace"} onClick={buttonHandle}>back</button>
+            <button className="equales-button button" value={"Enter"} onClick={buttonHandle}>=</button>
         </div>
     );
 }
